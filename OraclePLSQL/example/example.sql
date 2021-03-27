@@ -36,13 +36,24 @@ as
                           p_lastname_  in varchar2,
                           p_id_        out number)
   is
+    v_id clients.id%type;
   begin
     insert into clients(login,
                         firstname,
                         lastname)
         values(upper(p_login_),
                p_firstname_,
-               p_lastname_);
+               p_lastname_)
+    return id
+      into v_id;
+    if v_id > 0 then
+      pkg_msglog.p_log_err(p_objname    => 'pkg_clients.p_insert_user',
+                           p_msgcode    => '101',
+                           p_msgtext    => 'Создан новый пользователь с id = '||v_id,
+                           p_paramvalue => 'p_login = '||p_login_
+                                             ||', p_firstname = '||p_firstname_
+                                             ||', p_lastname = '||p_lastname_);
+    end if;
     commit;
   exception
     when others then
