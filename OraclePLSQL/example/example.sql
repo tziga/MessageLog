@@ -47,7 +47,7 @@ as
     return id
       into v_id;
     if v_id > 0 then
-      pkg_msglog.p_log_err(p_objname    => 'pkg_clients.p_insert_user',
+      pkg_msglog.p_log_wrn(p_objname    => 'pkg_clients.p_insert_user',
                            p_msgcode    => '101',
                            p_msgtext    => 'Создан новый пользователь с id = '||v_id,
                            p_paramvalue => 'p_login = '||p_login_
