@@ -64,7 +64,7 @@ as
                                              ||', p_firstname_ = '||p_firstname_
                                              ||', p_lastname_ = '||p_lastname_,
                            p_backtrace  => dbms_utility.format_error_backtrace);
-      rollback;
+	  raise;
   end p_insert_user;
   
   procedure p_create_user(p_login     in varchar2,
@@ -96,5 +96,6 @@ as
                                              ||', p_firstname = '||p_firstname
                                              ||', p_lastname = '||p_lastname,
                            p_backtrace  => dbms_utility.format_error_backtrace);
+	  raise;
   end p_create_user;
 end pkg_clients;
